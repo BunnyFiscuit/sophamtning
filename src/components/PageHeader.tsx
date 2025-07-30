@@ -9,7 +9,7 @@ export const PageHeader: React.FC = () => {
         style={{ backgroundColor: "#242424" }}
       >
         <AddressSearch />
-        <a href="/">
+        <a href="/sophamtning">
           <h1 className="text-xl sm:text-3xl font-bold">Sophämtningsschema</h1>
         </a>
       </div>
