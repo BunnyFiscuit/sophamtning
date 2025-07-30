@@ -33,27 +33,27 @@ export const PageContent: React.FC = () => {
       {!data && <WelcomeView />}
       {data && (
         <div
-          className="flex items-center justify-center flex-col p-4 sm:p-8 w-full"
+          className="flex items-center justify-center flex-col p-2 sm:p-8 w-full"
           style={{ minHeight: "50vh" }}
         >
-          <div className="text-3xl sm:text-6xl mb-6 sm:mb-12 font-bold text-center px-4 text-green-400">
+          <div className="text-3xl sm:text-6xl mb-4 sm:mb-12 font-bold text-center px-4 text-green-400">
             {data.address}
           </div>
           <div className="text-2xl sm:text-4xl text-center">Nästa hämtning</div>
           {nextPickup && (
-            <div className="text-center mt-4 px-4 mb-6">
+            <div className="text-center mt-2 px-4 mb-4">
               <div className="text-xl sm:text-2xl font-semibold">
                 {nextPickup.bin}
               </div>
-              <div className="text-lg sm:text-xl">
-                {formatSwedishDate(nextPickup.date)}
-              </div>
-              <div className="text-base sm:text-lg text-green-300">
+              <div className="text-2xl sm:text-xl text-green-300">
                 {nextPickup.daysUntil === 0
                   ? "Idag"
                   : nextPickup.daysUntil === 1
                   ? "Imorgon"
                   : `Om ${nextPickup.daysUntil} dagar`}
+              </div>
+              <div className="text-lg sm:text-xl text-slate-400">
+                {formatSwedishDate(nextPickup.date)}
               </div>
             </div>
           )}

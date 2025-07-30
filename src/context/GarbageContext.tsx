@@ -11,6 +11,7 @@ export interface GarbageSchedule {
 }
 
 export interface GarbageCollectionEntry {
+  id: number;
   address: string;
   city: string;
   schedule: GarbageSchedule[];
@@ -18,19 +19,28 @@ export interface GarbageCollectionEntry {
 
 interface GarbageContextType {
   data: GarbageCollectionEntry | undefined;
-  search: (query: string) => GarbageCollectionEntry | undefined;
+  setAddress: (addressId: number) => void;
+  addresses: {
+    id: number;
+    address: string;
+  }[];
 }
 
 // -- Context ---
 const GarbageContext = createContext<GarbageContextType>({
   data: undefined,
-  search: () => undefined,
+  setAddress: () => {},
+  addresses: [],
 });
 
 const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [data, setData] = useState<GarbageCollectionEntry | undefined>(
     undefined
   );
+  const addresses = dataRaw.map((entry) => ({
+    id: entry.id,
+    address: entry.address,
+  }));
 
   useEffect(() => {
     if (dataRaw.length === 1) {
@@ -39,18 +49,15 @@ const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     }
   }, []);
 
-  const search = (query: string): GarbageCollectionEntry | undefined => {
-    if (!query) {
-      setData(undefined);
-      return undefined;
+  const setAddress = (addressId: number) => {
+    const selectedAddress = dataRaw.find((entry) => entry.id === addressId);
+    if (selectedAddress) {
+      setData(selectedAddress);
     }
-    return dataRaw.find((entry) =>
-      entry.address.toLowerCase().includes(query.toLowerCase())
-    );
   };
 
   return (
-    <GarbageContext.Provider value={{ data, search }}>
+    <GarbageContext.Provider value={{ data, setAddress, addresses }}>
       {children}
     </GarbageContext.Provider>
   );

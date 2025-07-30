@@ -1,10 +1,11 @@
 {
   "name": "sophamtning",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev-exposed": "vite --host",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -12,6 +13,7 @@
   },
   "homepage": "https://bunnyfiscuit.github.io/sophamtning/",
   "dependencies": {
+    "@headlessui/react": "^2.2.7",
     "@tailwindcss/vite": "^4.1.11",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
