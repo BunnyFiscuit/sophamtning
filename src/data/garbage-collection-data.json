@@ -1,0 +1,52 @@
+[
+  {
+    "address": "Herregårdsgärdet",
+    "city": "Angered",
+    "schedule": [
+      {
+        "bin": "Rest- och matavfall",
+        "binNr": "1",
+        "day": "Onsdag",
+        "frequency": "odd_weeks"
+      },
+      {
+        "bin": "Plast och papper",
+        "binNr": "2",
+        "day": "Torsdag",
+        "frequency": "odd_weeks"
+      },
+      {
+        "bin": "Glas och metall",
+        "binNr": "3",
+        "day": "Måndag",
+        "frequency": "every_4th_week",
+        "startWeek": 15
+      }
+    ]
+  },
+  {
+    "address": "Dummytorget",
+    "city": "Dummytown",
+    "schedule": [
+      {
+        "bin": "Rest- och matavfall",
+        "binNr": "1",
+        "day": "Tisdag",
+        "frequency": "even_weeks"
+      },
+      {
+        "bin": "Plast och papper",
+        "binNr": "2",
+        "day": "Onsdag",
+        "frequency": "even_weeks"
+      },
+      {
+        "bin": "Glas och metall",
+        "binNr": "3",
+        "day": "Fredag",
+        "frequency": "every_4th_week",
+        "startWeek": 15
+      }
+    ]
+  }
+]
