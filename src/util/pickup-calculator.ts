@@ -4,6 +4,7 @@
 
 export interface NextPickup {
   bin: string;
+  binNr?: string;
   date: Date;
   daysUntil: number;
 }
@@ -76,6 +77,15 @@ export function calculateNextPickupDate(
   }
 
   const currentDate = new Date(fromDate);
+
+  // Check if it's before 13:00 (1 PM) today
+  const cutoffTime = new Date(currentDate);
+  cutoffTime.setHours(13, 0, 0, 0);
+
+  // If it's before 1 PM, we still consider today's pickup as valid
+  const isBeforeCutoff = fromDate.getTime() < cutoffTime.getTime();
+
+  // Set time to midnight for date comparisons
   currentDate.setHours(0, 0, 0, 0);
 
   // Look ahead up to 8 weeks to find the next valid pickup
@@ -89,10 +99,17 @@ export function calculateNextPickupDate(
 
       // Check if this week matches the frequency
       if (weekMatchesFrequency(weekNumber, frequency)) {
-        // Don't return today's date if it's already passed (assume pickup is in the morning)
-        if (daysAhead > 0 || checkDate.getTime() > fromDate.getTime()) {
-          return checkDate;
+        // For today's pickup: return it if it's before 1 PM, otherwise skip to next
+        if (daysAhead === 0) {
+          if (isBeforeCutoff) {
+            return checkDate;
+          }
+          // Skip today's pickup if it's after 1 PM
+          continue;
         }
+
+        // For future dates, always return
+        return checkDate;
       }
     }
   }

@@ -4,8 +4,8 @@ import {
   ComboboxOption,
   ComboboxOptions,
 } from "@headlessui/react";
-import { GarbageContextAPI } from "../context/GarbageContext";
 import { useState, useEffect } from "react";
+import { GarbageContextAPI } from "../../context/GarbageContext";
 
 export const AddressSearch: React.FC = () => {
   const { addresses, setAddress } = GarbageContextAPI.use();
@@ -30,7 +30,7 @@ export const AddressSearch: React.FC = () => {
   }, [selected, setAddress]);
 
   return (
-    <div className="w-full max-w-md">
+    <div className="max-w-md">
       <Combobox value={selected} onChange={setSelected}>
         <div className="relative">
           <ComboboxInput
